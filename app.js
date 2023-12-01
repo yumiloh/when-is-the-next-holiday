@@ -23,7 +23,7 @@ async function getHolidays(){
     indexForLongWeekends = 0;
     getNextLongWeekend();
 
-    countdown(nextHoliday.date);
+    countdownForHolidays(nextHoliday.date);
 }
 
 async function getSubsequentHoliday(){
@@ -43,7 +43,7 @@ async function getSubsequentHoliday(){
     holidayDate.textContent = new Date(nextHolidays[indexForHolidays].date).toLocaleDateString('en-US', dateOptions);
     mainContainer.appendChild(holidayName);
     mainContainer.appendChild(holidayDate);
-    countdown(nextHolidays[indexForHolidays].date);
+    countdownForHolidays(nextHolidays[indexForHolidays].date);
     return nextHolidays;
 }
 
@@ -63,11 +63,11 @@ async function getNextLongWeekend(){
     holidayDate.textContent = new Date(nextLongWeekends[indexForLongWeekends].date).toLocaleDateString('en-US', dateOptions);
     mainContainer.appendChild(holidayName);
     mainContainer.appendChild(holidayDate);
-    countdown(nextLongWeekends[indexForLongWeekends].date);
+    countdownForLongWeekends(nextLongWeekends[indexForLongWeekends].date);
     indexForLongWeekends++;
 }
 
-function countdown(nextHolidayDate){
+function countdownForHolidays(nextHolidayDate){
     let currentDate = new Date();
     let nextDate = new Date(nextHolidayDate);
     const dayDifference = Math.ceil((nextDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
@@ -75,3 +75,11 @@ function countdown(nextHolidayDate){
     h1.textContent = `The next holiday is on: ${dayDifference} days later`;
 }
 
+
+function countdownForLongWeekends(nextLongWeekendDate){
+    let currentDate = new Date();
+    let nextDate = new Date(nextLongWeekendDate);
+    const dayDifference = Math.ceil((nextDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
+    let h2 = document.getElementById('h2');
+    h2.textContent = `The next long weekend is on: ${dayDifference} days later`;
+}
